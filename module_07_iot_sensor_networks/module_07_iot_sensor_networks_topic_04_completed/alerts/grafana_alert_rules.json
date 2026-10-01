@@ -1,0 +1,277 @@
+{
+  "apiVersion": 1,
+  "groups": [
+    {
+      "orgId": 1,
+      "name": "digihaz_topic4_alerts",
+      "folder": "DigiHaz",
+      "interval": "1m",
+      "rules": [
+        {
+          "uid": "digihaz-red",
+          "title": "Landslide RED \u2014 Critical",
+          "condition": "C",
+          "data": [
+            {
+              "refId": "A",
+              "relativeTimeRange": {
+                "from": 600,
+                "to": 0
+              },
+              "datasourceUid": "${DS_INFLUXDB}",
+              "model": {
+                "refId": "A",
+                "query": "from(bucket: \"digihaz_sensors\") |> range(start:-10m) |> filter(fn:(r)=>r._measurement==\"sensors\") |> filter(fn:(r)=>r._field==\"tilt_deg\" or r._field==\"soil_pct\") |> pivot(rowKey:[\"_time\",\"site\"], columnKey:[\"_field\"], valueColumn:\"_value\") |> filter(fn:(r)=>r.tilt_deg>10.0 and r.soil_pct>90.0) |> last() |> map(fn:(r)=>({r with _value:1.0}))"
+              }
+            },
+            {
+              "refId": "C",
+              "relativeTimeRange": {
+                "from": 0,
+                "to": 0
+              },
+              "datasourceUid": "__expr__",
+              "model": {
+                "refId": "C",
+                "type": "threshold",
+                "expression": "A",
+                "conditions": [
+                  {
+                    "evaluator": {
+                      "params": [
+                        0
+                      ],
+                      "type": "gt"
+                    },
+                    "operator": {
+                      "type": "and"
+                    },
+                    "query": {
+                      "params": [
+                        "A"
+                      ]
+                    },
+                    "reducer": {
+                      "params": [],
+                      "type": "last"
+                    },
+                    "type": "query"
+                  }
+                ]
+              }
+            }
+          ],
+          "noDataState": "OK",
+          "execErrState": "Error",
+          "for": "2m",
+          "labels": {
+            "severity": "critical",
+            "team": "digihaz"
+          },
+          "notification_settings": {
+            "receiver": "DigiHaz Telegram"
+          },
+          "isPaused": false
+        },
+        {
+          "uid": "digihaz-yellow",
+          "title": "Landslide YELLOW \u2014 Elevated",
+          "condition": "C",
+          "data": [
+            {
+              "refId": "A",
+              "relativeTimeRange": {
+                "from": 600,
+                "to": 0
+              },
+              "datasourceUid": "${DS_INFLUXDB}",
+              "model": {
+                "refId": "A",
+                "query": "from(bucket: \"digihaz_sensors\") |> range(start:-10m) |> filter(fn:(r)=>r._measurement==\"sensors\") |> filter(fn:(r)=>r._field==\"tilt_deg\" or r._field==\"soil_pct\") |> pivot(rowKey:[\"_time\",\"site\"], columnKey:[\"_field\"], valueColumn:\"_value\") |> filter(fn:(r)=>r.tilt_deg>5.0 and r.soil_pct>80.0 and not (r.tilt_deg>10.0 and r.soil_pct>90.0)) |> last() |> map(fn:(r)=>({r with _value:1.0}))"
+              }
+            },
+            {
+              "refId": "C",
+              "relativeTimeRange": {
+                "from": 0,
+                "to": 0
+              },
+              "datasourceUid": "__expr__",
+              "model": {
+                "refId": "C",
+                "type": "threshold",
+                "expression": "A",
+                "conditions": [
+                  {
+                    "evaluator": {
+                      "params": [
+                        0
+                      ],
+                      "type": "gt"
+                    },
+                    "operator": {
+                      "type": "and"
+                    },
+                    "query": {
+                      "params": [
+                        "A"
+                      ]
+                    },
+                    "reducer": {
+                      "params": [],
+                      "type": "last"
+                    },
+                    "type": "query"
+                  }
+                ]
+              }
+            }
+          ],
+          "noDataState": "OK",
+          "execErrState": "Error",
+          "for": "2m",
+          "labels": {
+            "severity": "warning",
+            "team": "digihaz"
+          },
+          "notification_settings": {
+            "receiver": "DigiHaz Telegram"
+          },
+          "isPaused": false
+        },
+        {
+          "uid": "digihaz-storm",
+          "title": "Storm Approaching",
+          "condition": "C",
+          "data": [
+            {
+              "refId": "A",
+              "relativeTimeRange": {
+                "from": 600,
+                "to": 0
+              },
+              "datasourceUid": "${DS_INFLUXDB}",
+              "model": {
+                "refId": "A",
+                "query": "from(bucket: \"digihaz_sensors\") |> range(start:-1h) |> filter(fn:(r)=>r._measurement==\"sensors\" and r._field==\"press_hpa\") |> aggregateWindow(every:10m, fn:mean, createEmpty:false) |> derivative(unit:1h, nonNegative:false) |> last()"
+              }
+            },
+            {
+              "refId": "C",
+              "relativeTimeRange": {
+                "from": 0,
+                "to": 0
+              },
+              "datasourceUid": "__expr__",
+              "model": {
+                "refId": "C",
+                "type": "threshold",
+                "expression": "A",
+                "conditions": [
+                  {
+                    "evaluator": {
+                      "params": [
+                        -2
+                      ],
+                      "type": "lt"
+                    },
+                    "operator": {
+                      "type": "and"
+                    },
+                    "query": {
+                      "params": [
+                        "A"
+                      ]
+                    },
+                    "reducer": {
+                      "params": [],
+                      "type": "last"
+                    },
+                    "type": "query"
+                  }
+                ]
+              }
+            }
+          ],
+          "noDataState": "OK",
+          "execErrState": "Error",
+          "for": "5m",
+          "labels": {
+            "severity": "warning",
+            "team": "digihaz"
+          },
+          "notification_settings": {
+            "receiver": "DigiHaz Browser"
+          },
+          "isPaused": false
+        },
+        {
+          "uid": "digihaz-offline",
+          "title": "Sensor Offline",
+          "condition": "C",
+          "data": [
+            {
+              "refId": "A",
+              "relativeTimeRange": {
+                "from": 600,
+                "to": 0
+              },
+              "datasourceUid": "${DS_INFLUXDB}",
+              "model": {
+                "refId": "A",
+                "query": "from(bucket: \"digihaz_sensors\") |> range(start:-10m) |> filter(fn:(r)=>r._measurement==\"sensors\" and r._field==\"tilt_deg\") |> group(columns:[\"site\"]) |> count()"
+              }
+            },
+            {
+              "refId": "C",
+              "relativeTimeRange": {
+                "from": 0,
+                "to": 0
+              },
+              "datasourceUid": "__expr__",
+              "model": {
+                "refId": "C",
+                "type": "threshold",
+                "expression": "A",
+                "conditions": [
+                  {
+                    "evaluator": {
+                      "params": [
+                        1
+                      ],
+                      "type": "lt"
+                    },
+                    "operator": {
+                      "type": "and"
+                    },
+                    "query": {
+                      "params": [
+                        "A"
+                      ]
+                    },
+                    "reducer": {
+                      "params": [],
+                      "type": "last"
+                    },
+                    "type": "query"
+                  }
+                ]
+              }
+            }
+          ],
+          "noDataState": "OK",
+          "execErrState": "Error",
+          "for": "10m",
+          "labels": {
+            "severity": "info",
+            "team": "digihaz"
+          },
+          "notification_settings": {
+            "receiver": "DigiHaz Browser"
+          },
+          "isPaused": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+[Unit]
+Description=DigiHaz MQTT to InfluxDB bridge
+After=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/opt/digihaz
+EnvironmentFile=/opt/digihaz/.env
+ExecStart=/usr/bin/python3 /opt/digihaz/mqtt_to_influx_bridge.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
