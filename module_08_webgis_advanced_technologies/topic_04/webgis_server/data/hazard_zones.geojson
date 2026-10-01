@@ -1,0 +1,77 @@
+{
+  "type": "FeatureCollection",
+  "name": "digihaz_demo_flood_hazard_zones",
+  "description": "Demonstration polygons for coursework only.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cai Rang flood-prone zone",
+        "level": "High",
+        "note": "Demonstration polygon; not an operational warning."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.735,
+              9.973
+            ],
+            [
+              105.813,
+              9.973
+            ],
+            [
+              105.825,
+              10.027
+            ],
+            [
+              105.752,
+              10.04
+            ],
+            [
+              105.735,
+              9.973
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Central lowland watch zone",
+        "level": "Moderate",
+        "note": "Demonstration polygon used to show a local vector overlay."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.748,
+              10.022
+            ],
+            [
+              105.819,
+              10.02
+            ],
+            [
+              105.829,
+              10.074
+            ],
+            [
+              105.765,
+              10.084
+            ],
+            [
+              105.748,
+              10.022
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

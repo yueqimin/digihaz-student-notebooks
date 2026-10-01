@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DIGIHAZ Module 08 responsive open-source WebGIS integrating raster, vector and sensor-network data.">
+  <title>DIGIHAZ Flood Monitoring WebGIS</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">DIGIHAZ · Module 08</p>
+      <h1>Flood Monitoring WebGIS</h1>
+      <p class="subtitle">Raster + vector + sensor-network integration</p>
+    </div>
+    <div class="server-badge" id="server-badge">
+      <span class="status-dot" id="status-dot"></span>
+      <span id="server-status">Checking server…</span>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="sidebar">
+      <section class="card">
+        <h2>Network summary</h2>
+        <div class="metrics">
+          <div><span id="metric-stations">–</span><small>stations</small></div>
+          <div><span id="metric-alerts">–</span><small>alerts</small></div>
+          <div><span id="metric-level">–</span><small>max level (m)</small></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Selected station</h2>
+        <div id="station-details" class="station-details">
+          Select a sensor marker on the map.
+        </div>
+        <canvas id="history-chart" aria-label="Sensor water level history"></canvas>
+      </section>
+
+      <section class="card legend-card">
+        <h2>Legend</h2>
+        <p><span class="legend-dot normal"></span>Normal sensor</p>
+        <p><span class="legend-dot watch"></span>Watch sensor</p>
+        <p><span class="legend-dot alert"></span>Alert sensor</p>
+        <p><span class="legend-box hazard"></span>Flood hazard zone (vector)</p>
+        <p class="small-note">Raster backgrounds are supplied as web tile layers. Local coursework data are demonstrative.</p>
+      </section>
+    </aside>
+
+    <section class="map-panel">
+      <div id="map" role="application" aria-label="Interactive flood monitoring map"></div>
+      <div class="map-note">Click a sensor for latest values and its observation history.</div>
+    </section>
+  </main>
+
+  <footer>
+    Open-source coursework demo · Leaflet · Flask · GeoJSON · CSV
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="static/js/app.js"></script>
+</body>
+</html>

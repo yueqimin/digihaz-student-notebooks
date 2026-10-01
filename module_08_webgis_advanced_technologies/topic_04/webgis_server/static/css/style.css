@@ -1,0 +1,234 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #eef3f8;
+  line-height: 1.45;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: #0f2747;
+  color: white;
+}
+
+.eyebrow {
+  margin: 0 0 .1rem;
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .78;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.subtitle {
+  margin: .2rem 0 0;
+  color: #c9d9ec;
+  font-size: .9rem;
+}
+
+.server-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .55rem .75rem;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  font-size: .82rem;
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: .65rem;
+  height: .65rem;
+  border-radius: 50%;
+  background: #f0a93b;
+}
+
+.status-dot.online { background: #36c98f; }
+.status-dot.static { background: #f0a93b; }
+
+.app-shell {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(250px, 330px) 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  min-width: 0;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(30, 55, 90, .08);
+}
+
+.card h2 {
+  margin: 0 0 .75rem;
+  font-size: 1rem;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+}
+
+.metrics div {
+  padding: .65rem .35rem;
+  text-align: center;
+  border-radius: 10px;
+  background: #f4f7fb;
+}
+
+.metrics span {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #123d6a;
+}
+
+.metrics small {
+  display: block;
+  margin-top: .1rem;
+  font-size: .65rem;
+  color: #65738a;
+}
+
+.station-details {
+  min-height: 5.5rem;
+  font-size: .9rem;
+}
+
+.station-details strong {
+  display: inline-block;
+  min-width: 6.5rem;
+}
+
+#history-chart {
+  width: 100% !important;
+  max-height: 210px;
+}
+
+.legend-card p {
+  margin: .45rem 0;
+  font-size: .82rem;
+}
+
+.legend-dot,
+.legend-box {
+  display: inline-block;
+  width: .75rem;
+  height: .75rem;
+  margin-right: .5rem;
+  vertical-align: -.05rem;
+}
+
+.legend-dot { border-radius: 50%; }
+.legend-dot.normal { background: #2d9d78; }
+.legend-dot.watch { background: #e1a120; }
+.legend-dot.alert { background: #d64b4b; }
+.legend-box.hazard {
+  border: 2px solid #296a9b;
+  background: rgba(62, 135, 189, .22);
+}
+
+.small-note {
+  color: #66758b;
+  font-size: .74rem !important;
+}
+
+.map-panel {
+  position: relative;
+  min-width: 0;
+  min-height: 620px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 8px 24px rgba(30, 55, 90, .08);
+}
+
+#map {
+  position: absolute;
+  inset: 0;
+}
+
+.map-note {
+  position: absolute;
+  z-index: 500;
+  right: .7rem;
+  bottom: .7rem;
+  max-width: 320px;
+  padding: .55rem .7rem;
+  border-radius: 9px;
+  background: rgba(15, 39, 71, .88);
+  color: white;
+  font-size: .74rem;
+  pointer-events: none;
+}
+
+footer {
+  padding: .55rem 1rem;
+  text-align: center;
+  color: #5e6d83;
+  font-size: .72rem;
+}
+
+.leaflet-popup-content { line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .legend-card { grid-column: 1 / -1; }
+
+  .map-panel { min-height: 58vh; }
+}
+
+@media (max-width: 600px) {
+  .app-shell { padding: .65rem; }
+  .sidebar { grid-template-columns: 1fr; }
+  .legend-card { grid-column: auto; }
+  .map-panel { min-height: 62vh; }
+  .server-badge { white-space: normal; }
+}

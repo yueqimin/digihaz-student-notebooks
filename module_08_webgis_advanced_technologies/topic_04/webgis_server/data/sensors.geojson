@@ -1,0 +1,102 @@
+{
+  "type": "FeatureCollection",
+  "name": "digihaz_demo_sensor_network",
+  "description": "Demonstration data for coursework only; not operational observations.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "CTH-01",
+        "name": "Can Tho Central",
+        "water_level_m": 2.32,
+        "rainfall_mm_1h": 16.4,
+        "temperature_c": 28.7,
+        "status": "watch",
+        "observed_at": "2026-10-01T11:30:00+08:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.7831,
+          10.0341
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "CTH-02",
+        "name": "O Mon",
+        "water_level_m": 1.78,
+        "rainfall_mm_1h": 8.1,
+        "temperature_c": 29.2,
+        "status": "normal",
+        "observed_at": "2026-10-01T11:30:00+08:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.6245,
+          10.1162
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "CTH-03",
+        "name": "Cai Rang",
+        "water_level_m": 2.61,
+        "rainfall_mm_1h": 24.8,
+        "temperature_c": 28.4,
+        "status": "alert",
+        "observed_at": "2026-10-01T11:30:00+08:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.7763,
+          9.9999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "CTH-04",
+        "name": "Phong Dien",
+        "water_level_m": 2.08,
+        "rainfall_mm_1h": 13.2,
+        "temperature_c": 28.9,
+        "status": "watch",
+        "observed_at": "2026-10-01T11:30:00+08:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.6558,
+          9.992
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "station_id": "CTH-05",
+        "name": "Thot Not",
+        "water_level_m": 1.64,
+        "rainfall_mm_1h": 5.9,
+        "temperature_c": 29.5,
+        "status": "normal",
+        "observed_at": "2026-10-01T11:30:00+08:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.536,
+          10.2722
+        ]
+      }
+    }
+  ]
+}
